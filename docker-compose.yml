@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+  php:
+    build: ./docker/php-fpm
+    volumes:
+      - "./:/var/www/symfony-test:cached"
+    depends_on:
+      - database
+    environment:
+      - APP_ENV=${APP_ENV}
+      - APP_SECRET=${APP_SECRET}
+      - DATABASE_URL=mysql://${DATABASE_USER}:${DATABASE_PASSWORD}@database:3306/${DATABASE_NAME}?serverVersion=5.7
+  nginx:
+    build: ./docker/nginx
+    volumes:
+      - "./:/var/www/symfony-test:cached"
+    depends_on:
+      - php
+  database:
+    build: ./docker/database
+    environment:
+      - POSTGRES_DATABASE=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    volumes:
+      - ./database/data/dump:/var/www/symfony-test/dump
+      - ./database/postgresql:/var/lib/postgresql/data
