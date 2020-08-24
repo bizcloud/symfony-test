@@ -3,7 +3,7 @@ services:
   php:
     build: ./docker/php-fpm
     volumes:
-      - "./:/var/www/symfony-test:cached"
+      - "./:/var/www/symfony-test"
     depends_on:
       - database
     environment:
@@ -13,7 +13,7 @@ services:
   nginx:
     build: ./docker/nginx
     volumes:
-      - "./:/var/www/symfony-test:cached"
+      - "./:/var/www/symfony-test"
     depends_on:
       - php
   database:

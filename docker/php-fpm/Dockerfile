@@ -35,6 +35,9 @@ RUN apt-get update \
 # Install COMPOSER
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Install Symfony-CLI
+RUN wget https://get.symfony.com/cli/installer -O - | bash
+
 # Install PCOV extension
 RUN pecl install pcov \
     && docker-php-ext-enable pcov
