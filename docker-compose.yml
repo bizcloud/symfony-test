@@ -23,5 +23,5 @@ services:
       - POSTGRES_USER=${DATABASE_USER}
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
     volumes:
-      - ./database/data/dump:/var/www/symfony-test/dump
-      - ./database/postgresql:/var/lib/postgresql/data
+      - ./docker/database/dump:/var/www/symfony-test/dump
+      - ./docker/database/postgresql:/var/lib/postgresql/data
