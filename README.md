@@ -5,8 +5,11 @@ $ mkdir -p /var/www/ & cd /var/www
 $ git clone https://github.com/bizcloud/symfony-test
 $ cd symfony-test
 ```
+## Requirements
 
-# Run project (with docker)
+OS Ubuntu
+
+## Run project (with docker)
 
 On first run :
 
@@ -22,7 +25,7 @@ $ make start
 
 http://localhost/
 
-# Run phpunit tests + api spec compliance tests + qa tools (with docker)
+## Run phpunit tests + api spec compliance tests + qa tools (with docker)
 
 ```bash
 $ make ci
