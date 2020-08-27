@@ -1,13 +1,20 @@
-# Getting started
+# Symfony-test
+
+[![Build Status](https://scrutinizer-ci.com/g/bizcloud/symfony-test/badges/build.png?b=master)](https://scrutinizer-ci.com/bizcloud/symfony-test/build-status/master)
+[![Code Coverage](https://scrutinizer-ci.com/g/bizcloud/symfony-test/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/bizcloud/symfony-test/code-structure/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bizcloud/symfony-test/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bizcloud/symfony-test/code-structure/master)
+
+## Requirements
+
+OS Ubuntu
+
+## Installation
 
 ```bash
 $ mkdir -p /var/www/ & cd /var/www
 $ git clone https://github.com/bizcloud/symfony-test
 $ cd symfony-test
 ```
-## Requirements
-
-OS Ubuntu
 
 ## Run project (with docker)
 
