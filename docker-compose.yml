@@ -2,26 +2,42 @@ version: '3.7'
 services:
   php:
     build: ./docker/php-fpm
+    container_name: 'php-fpm'
+    ports:
+      - '9000:9000'
     volumes:
       - "./:/var/www/symfony-test"
+    working_dir: /var/www/symfony-test
     depends_on:
-      - database
+      - postgres
     environment:
       - APP_ENV=${APP_ENV}
       - APP_SECRET=${APP_SECRET}
-      - DATABASE_URL=mysql://${DATABASE_USER}:${DATABASE_PASSWORD}@database:3306/${DATABASE_NAME}?serverVersion=5.7
+      - DATABASE_URL=postgresql://${DATABASE_USER}:${DATABASE_PASSWORD}@database:5432/${DATABASE_NAME}
   nginx:
-    build: ./docker/nginx
+    image: nginx:alpine
+    container_name: 'nginx'
+    working_dir: /var/www/symfony-test
+    ports:
+        - '80:80'
     volumes:
       - "./:/var/www/symfony-test"
+      - ./docker/nginx/conf/nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - php
-  database:
-    build: ./docker/database
+  postgres:
+    image: postgres:9.6
+    ports:
+        - '5432:5432'
+    container_name: 'postgresql'
+    working_dir: /var/www/symfony-test
+    restart: always
     environment:
       - POSTGRES_DATABASE=${DATABASE_NAME}
       - POSTGRES_USER=${DATABASE_USER}
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
     volumes:
-      - ./docker/database/dump:/var/www/symfony-test/dump
-      - ./docker/database/postgresql:/var/lib/postgresql/data
+      - ./docker/database/data/:/var/lib/postgresql/data/
+
+volumes:
+  postgresql:

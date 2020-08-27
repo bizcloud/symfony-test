@@ -10,7 +10,8 @@ COMPOSER       = $(EXEC_PHP) composer
 ##
 
 build:
-	@$(DOCKER_COMPOSE) pull --parallel --quiet --ignore-pull-failures 2> /dev/null
+	@$(DOCKER_COMPOSE) pull
+	#@$(DOCKER_COMPOSE) pull --parallel --quiet --ignore-pull-failures 2> /dev/null
 	$(DOCKER_COMPOSE) build --pull
 
 ##install: build start vendor db
@@ -42,9 +43,12 @@ reload:
 	bin/console doctrine:migrations:migrate --no-interaction --env=dev
 	bin/console doctrine:fixtures:load --no-interaction --env=dev
 
-vendor:
-	$(COMPOSER) update
-	$(COMPOSER) install
+.PHONY: build kill install reset start stop clean reinstall reload security
+
+##
+## Utils
+## -----
+##
 
 db: ## Reset the database and load fixtures
 db: vendor
@@ -52,3 +56,24 @@ db: vendor
 	$(SYMFONY) doctrine:database:create --if-not-exists
 	$(SYMFONY) doctrine:migrations:migrate --no-interaction --allow-no-migration
 	$(SYMFONY) doctrine:fixtures:load --no-interaction
+
+migration: ## Generate a new doctrine migration
+migration: vendor
+	$(SYMFONY) doctrine:migrations:diff
+
+db-validate-schema: ## Validate the doctrine ORM mapping
+db-validate-schema: vendor
+	$(SYMFONY) doctrine:schema:validate
+
+.PHONY: db migration watch
+
+
+# rules based on files
+
+#composer.lock: composer.json
+#	$(COMPOSER) update --lock --no-scripts --no-interaction
+
+vendor:
+	$(COMPOSER) install
+
+.PHONY: vendor
