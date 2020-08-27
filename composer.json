@@ -24,7 +24,9 @@
     "symfony/debug-pack": "*",
     "symfony/maker-bundle": "^1.0",
     "symfony/profiler-pack": "*",
-    "symfony/test-pack": "*"
+    "symfony/test-pack": "*",
+    "phake/phake": "2.*",
+    "phpunit/phpunit": "5.7.7"
   },
   "config": {
     "optimize-autoloader": true,
