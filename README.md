@@ -1,4 +1,32 @@
+# Getting started
 
+```bash
+$ mkdir -p /var/www/ & cd /var/www
+$ git clone https://github.com/bizcloud/symfony-test
+$ cd symfony-test
+```
+
+# Run project (with docker)
+
+On first run :
+
+```bash
+$ make install
+```
+
+On next runs :
+
+```bash
+$ make start
+```
+
+http://localhost/
+
+# Run phpunit tests + api spec compliance tests + qa tools (with docker)
+
+```bash
+$ make ci
+```
 
 # Тестовое задание для PHP-разработчика
 
