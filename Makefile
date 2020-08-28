@@ -14,8 +14,8 @@ build:
 	#@$(DOCKER_COMPOSE) pull --parallel --quiet --ignore-pull-failures 2> /dev/null
 	$(DOCKER_COMPOSE) build --pull
 
-##install: build start vendor db
-install: build start vendor
+install: build start vendor db
+#install: build start vendor
 
 start:
 	$(DOCKER_COMPOSE) up --build --remove-orphans --force-recreate --detach
@@ -74,7 +74,7 @@ db-validate-schema: vendor
 #	$(COMPOSER) update --lock --no-scripts --no-interaction
 
 vendor:
-	$(COMPOSER) install
+	$(COMPOSER) install --profile --verbose
 
 .PHONY: vendor
 
