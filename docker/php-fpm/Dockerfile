@@ -51,8 +51,8 @@ RUN pecl install pcov \
     && docker-php-ext-enable pcov
 
 ## Install XDEBUG extension
-#RUN pecl install xdebug \
-#    && docker-php-ext-enable xdebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
 
 # Set PROJECT USER
 RUN useradd -ms /bin/bash symfony
