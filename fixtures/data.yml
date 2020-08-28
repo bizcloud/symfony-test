@@ -1,0 +1,37 @@
+App\Entity\Maker:
+  maker_1:
+    name: 'audi'
+  maker_2:
+    name: 'bmw'
+  maker_3:
+    name: 'chevrolet'
+  maker_4:
+    name: 'citroen'
+  maker_5:
+    name: 'dodge'
+  maker_6:
+    name: 'ford'
+  maker_7:
+    name: 'honda'
+  maker_8:
+    name: 'kia'
+  maker_9:
+    name: 'land_rover'
+  maker_10:
+    name: 'mazda'
+  maker_11:
+    name: 'mersedes'
+  maker_12:
+    name: 'nissan'
+  maker_13:
+    name: 'porsche'
+  maker_14:
+    name: 'renault'
+  maker_15:
+    name: 'skoda'
+  maker_16:
+    name: 'toyota'
+  maker_17:
+    name: 'volkswagen'
+  maker_18:
+    name: 'lada'
