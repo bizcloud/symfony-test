@@ -68,6 +68,11 @@ class Advert
      */
     private $color;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Fuel::class, inversedBy="adverts")
+     */
+    private $fuel;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -189,6 +194,18 @@ class Advert
     public function setColor(?Color $color): self
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    public function getFuel(): ?Fuel
+    {
+        return $this->fuel;
+    }
+
+    public function setFuel(?Fuel $fuel): self
+    {
+        $this->fuel = $fuel;
 
         return $this;
     }
