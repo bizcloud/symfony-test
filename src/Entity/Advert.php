@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\DBAL\FuelEnumType;
 use App\DBAL\TransmissionEnumType;
 use App\Repository\AdvertRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -79,6 +81,16 @@ class Advert
      * @ORM\Column(type="fuel_enum_type", nullable=true)
      */
     private $fuel;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="advert")
+     */
+    private $images;
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -227,6 +239,37 @@ class Advert
     public function setFuel(?FuelEnumType $fuel): self
     {
         $this->fuel = $fuel;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setAdvert($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getAdvert() === $this) {
+                $image->setAdvert(null);
+            }
+        }
 
         return $this;
     }
