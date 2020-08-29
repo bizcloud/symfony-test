@@ -40,6 +40,12 @@ RUN apt-get update \
     && docker-php-ext-install zip \
     && rm -rf /var/lib/apt/lists/*
 
+# Install dom extension
+RUN apt-get update -y && apt-get upgrade -y;
+RUN apt-get install -y libxml2-dev
+RUN docker-php-ext-install -j$(nproc) xmlrpc
+
+
 # Install COMPOSER
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
