@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\DBAL\TransmissionEnumType;
 use App\Repository\AdvertRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -59,6 +60,11 @@ class Advert
     private $odometer;
 
     /**
+     * @ORM\Column(type="transmission_enum_type", nullable=true)
+     */
+    private $transmission;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $info;
@@ -72,6 +78,7 @@ class Advert
      * @ORM\ManyToOne(targetEntity=Fuel::class, inversedBy="adverts")
      */
     private $fuel;
+
 
     public function getId(): ?int
     {
@@ -209,4 +216,17 @@ class Advert
 
         return $this;
     }
+
+    public function getTransmission(): ?TransmissionEnumType
+    {
+        return $this->transmission;
+    }
+
+    public function setTransmission(?TransmissionEnumType $transmission): self
+    {
+        $this->transmission = $transmission;
+
+        return $this;
+    }
+
 }

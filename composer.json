@@ -13,6 +13,7 @@
         "php": ">=7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "acelaya/doctrine-enum-type": "^2.3",
         "composer/package-versions-deprecated": "^1.11",
         "doctrine/annotations": "*",
         "doctrine/doctrine-bundle": "*",
