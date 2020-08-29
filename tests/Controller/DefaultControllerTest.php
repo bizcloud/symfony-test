@@ -13,6 +13,6 @@ class DefaultControllerTest extends WebTestCase
         $client->request('GET', '/');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'Каталог автомобилей 2');
+        $this->assertSelectorTextContains('h1', 'Каталог автомобилей');
     }
 }
