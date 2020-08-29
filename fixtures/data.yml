@@ -568,4 +568,25 @@ App\Entity\Generation:
     year_end: '2020'
     maker: '@model_41'
 
+App\Entity\Color:
+  color_1:
+    name: 'red'
+  color_2:
+    name: 'green'
+  color_3:
+    name: 'white'
+  color_4:
+    name: 'blue'
+  color_5:
+    name: 'black'
+  color_6:
+    name: 'gray'
+  color_7:
+    name: 'yellow'
+  color_8:
+    name: 'orange'
+  color_9:
+    name: 'pink'
+
+
 

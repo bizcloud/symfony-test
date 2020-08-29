@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\GenerationRepository;
+use App\Repository\ColorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=GenerationRepository::class)
+ * @ORM\Entity(repositoryClass=ColorRepository::class)
  */
-class Generation
+class Color
 {
     /**
      * @ORM\Id
@@ -25,23 +25,7 @@ class Generation
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Model::class, inversedBy="generations")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $model;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $year_start;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $year_end;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Advert::class, mappedBy="generation")
+     * @ORM\OneToMany(targetEntity=Advert::class, mappedBy="color")
      */
     private $adverts;
 
@@ -67,42 +51,6 @@ class Generation
         return $this;
     }
 
-    public function getModel(): ?Model
-    {
-        return $this->model;
-    }
-
-    public function setModel(?Model $model): self
-    {
-        $this->model = $model;
-
-        return $this;
-    }
-
-    public function getYearStart(): ?int
-    {
-        return $this->year_start;
-    }
-
-    public function setYearStart(?int $year_start): self
-    {
-        $this->year_start = $year_start;
-
-        return $this;
-    }
-
-    public function getYearEnd(): ?int
-    {
-        return $this->year_end;
-    }
-
-    public function setYearEnd(?int $year_end): self
-    {
-        $this->year_end = $year_end;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Advert[]
      */
@@ -115,7 +63,7 @@ class Generation
     {
         if (!$this->adverts->contains($advert)) {
             $this->adverts[] = $advert;
-            $advert->setGeneration($this);
+            $advert->setColor($this);
         }
 
         return $this;
@@ -126,8 +74,8 @@ class Generation
         if ($this->adverts->contains($advert)) {
             $this->adverts->removeElement($advert);
             // set the owning side to null (unless already changed)
-            if ($advert->getGeneration() === $this) {
-                $advert->setGeneration(null);
+            if ($advert->getColor() === $this) {
+                $advert->setColor(null);
             }
         }
 
