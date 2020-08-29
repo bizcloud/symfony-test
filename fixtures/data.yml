@@ -588,13 +588,5 @@ App\Entity\Color:
   color_9:
     name: 'pink'
 
-App\Entity\Fuel:
-  fuel_1:
-    name: 'gas'
-  fuel_2:
-    name: 'diesel'
-  fuel_3:
-    name: 'petrol'
-
 
 

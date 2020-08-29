@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\DBAL\FuelEnumType;
 use App\DBAL\TransmissionEnumType;
 use App\Repository\AdvertRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -75,7 +76,7 @@ class Advert
     private $color;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Fuel::class, inversedBy="adverts")
+     * @ORM\Column(type="fuel_enum_type", nullable=true)
      */
     private $fuel;
 
@@ -205,17 +206,6 @@ class Advert
         return $this;
     }
 
-    public function getFuel(): ?Fuel
-    {
-        return $this->fuel;
-    }
-
-    public function setFuel(?Fuel $fuel): self
-    {
-        $this->fuel = $fuel;
-
-        return $this;
-    }
 
     public function getTransmission(): ?TransmissionEnumType
     {
@@ -225,6 +215,18 @@ class Advert
     public function setTransmission(?TransmissionEnumType $transmission): self
     {
         $this->transmission = $transmission;
+
+        return $this;
+    }
+
+    public function getFuel(): ?FuelEnumType
+    {
+        return $this->fuel;
+    }
+
+    public function setFuel(?FuelEnumType $fuel): self
+    {
+        $this->fuel = $fuel;
 
         return $this;
     }
