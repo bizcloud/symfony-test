@@ -3,6 +3,7 @@ EXEC           = $(DOCKER_COMPOSE) exec
 EXEC_PHP       = $(DOCKER_COMPOSE) exec -T php
 SYMFONY        = $(EXEC_PHP) bin/console
 COMPOSER       = $(EXEC_PHP) composer
+RUN       = $(DOCKER_COMPOSE) run
 
 ##
 ## Project
@@ -14,7 +15,7 @@ build:
 	#@$(DOCKER_COMPOSE) pull --parallel --quiet --ignore-pull-failures 2> /dev/null
 	$(DOCKER_COMPOSE) build --pull
 
-install: build start vendor db
+install: build start vendor db webpack
 #install: build start vendor
 
 start:
@@ -46,6 +47,12 @@ reload:
 ## Utils
 ## -----
 ##
+
+webpack:
+	$(RUN) node yarn install
+	$(RUN) node yarn encore dev
+	$(RUN) node yarn encore production
+.PHONY: build
 
 db: ## Reset the database and load fixtures
 db: vendor

@@ -43,6 +43,8 @@ services:
   node:
     build: docker/node
     working_dir: /var/www/symfony-test
+    ports:
+      - '3000:3000'
     volumes:
       - "./:/var/www/symfony-test"
     depends_on:
