@@ -32,9 +32,6 @@ clean: kill
 
 reinstall: clean install
 
-security:
-	vendor/bin/security-checker security:check
-
 reload:
 	rm -rf var/cache/dev/* var/logs/dev/*
 	bin/console cache:clear --env=dev
@@ -43,7 +40,7 @@ reload:
 	bin/console doctrine:migrations:migrate --no-interaction --env=dev
 	bin/console doctrine:fixtures:load --no-interaction --env=dev
 
-.PHONY: build kill install reset start stop clean reinstall reload security
+.PHONY: build kill install reset start stop clean reinstall reload
 
 ##
 ## Utils
@@ -77,4 +74,34 @@ vendor:
 	$(COMPOSER) install --profile --verbose
 
 .PHONY: vendor
+
+ci: ## Run all quality insurance checks (tests, code styles, linting, security, static analysis...)
+#ci: php-cs-fixer phpcs phpmd phpmnd phpstan psalm lint validate-composer validate-mapping security test test-coverage test-spec
+ci: test test-coverage validate-composer validate-mapping
+
+test: ## Run phpunit tests
+test:
+	$(EXEC_PHP) vendor/bin/phpunit
+
+test-coverage: ## Run phpunit tests with code coverage (phpdbg)
+test-coverage: test-coverage-pcov
+
+test-coverage-pcov: ## Run phpunit tests with code coverage (pcov - uncomment extension in dockerfile)
+test-coverage-pcov:
+	$(EXEC_PHP) vendor/bin/phpunit --coverage-clover=coverage.xml
+
+validate-composer: ## Validate composer.json and composer.lock
+validate-composer:
+	$(EXEC_PHP) composer validate
+#	$(EXEC_PHP) composer normalize --dry-run
+
+validate-mapping: ## Validate doctrine mapping
+validate-mapping:
+	$(SYMFONY) doctrine:schema:validate --skip-sync -vvv --no-interaction
+
+security: ## Run security-checker
+security:
+	$(EXEC_PHP) vendor/bin/security-checker security:check
+
+
 
