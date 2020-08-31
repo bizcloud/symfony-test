@@ -50,6 +50,8 @@ reload:
 
 webpack:
 	$(RUN) node yarn install
+	$(RUN) node yarn add vue@^2.5 vue-loader@^15 vue-template-compiler --dev
+	$(RUN) node yarn add bootstrap-vue bootstrap
 	$(RUN) node yarn encore dev
 	$(RUN) node yarn encore production
 .PHONY: build
