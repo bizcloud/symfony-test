@@ -17,5 +17,7 @@ class FuelEnumType extends PhpEnumType
     public const GAS = 'gas';
     public const DIESEL = 'diesel';
     public const PETROL = 'petrol';
+    public const ELECTRIC = 'electric';
+    public const HYBRID = 'hybrid';
 
 }
