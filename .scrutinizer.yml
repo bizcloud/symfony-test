@@ -3,9 +3,8 @@ build:
     php:
       version: 7.4
   tests:
-    before:
-      - 'yarn encore dev'
     override:
+      - yarn encore dev
       -
         command: vendor/bin/phpunit --coverage-clover=coverage.xml
         coverage:
