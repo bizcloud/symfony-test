@@ -3,10 +3,10 @@ build:
     php:
       version: 7.4
   tests:
-    override:
+    before:
       - yarn encore dev
-      -
-        command: vendor/bin/phpunit --coverage-clover=coverage.xml
+    override:
+      - command: vendor/bin/phpunit --coverage-clover=coverage.xml
         coverage:
           file: coverage.xml
           format: php-clover
