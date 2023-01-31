@@ -57,7 +57,7 @@ RUN pecl install pcov \
     && docker-php-ext-enable pcov
 
 ## Install XDEBUG extension
-RUN pecl install xdebug \
+RUN pecl install xdebug-3.1.5 \
     && docker-php-ext-enable xdebug
 
 # Set PROJECT USER

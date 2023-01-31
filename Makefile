@@ -11,7 +11,7 @@ RUN       = $(DOCKER_COMPOSE) run
 ##
 
 build:
-	@$(DOCKER_COMPOSE) pull
+	#$(DOCKER_COMPOSE) pull
 	#@$(DOCKER_COMPOSE) pull --parallel --quiet --ignore-pull-failures 2> /dev/null
 	$(DOCKER_COMPOSE) build --pull
 
